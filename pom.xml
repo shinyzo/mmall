@@ -285,8 +285,44 @@
         </configuration>
       </plugin>
     </plugins>
-
+    <!-- 环境编译打包 -->
+    <resources>
+        <resource>
+          <directory>src/main/resources.${deploy.type}}</directory>
+          <excludes>
+            <exclude>*.jsp</exclude>
+          </excludes>
+        </resource>
+        <resource>
+          <directory>src/main/resources</directory>
+        </resource>
+    </resources>
   </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <devploy.type>dev</devploy.type>
+      </properties>
+    </profile>
+    <profile>
+      <id>beta</id>
+      <properties>
+        <devploy.type>beta</devploy.type>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <devploy.type>prod</devploy.type>
+      </properties>
+    </profile>
+
+  </profiles>
 
 
 </project>
